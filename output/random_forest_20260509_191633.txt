@@ -1,0 +1,102 @@
+Esecuzione avviata: 2026-05-09 19:16:33
+Log salvato in: output/random_forest_20260509_191633.txt
+
+
+Dimensioni del dataset: 11055 righe, 32 colonne
+
+Prime 5 righe:
+   index  having_IPhaving_IP_Address  URLURL_Length  Shortining_Service  having_At_Symbol  double_slash_redirecting  Prefix_Suffix  ...  DNSRecord  web_traffic  Page_Rank  Google_Index  Links_pointing_to_page  Statistical_report  Result
+0      1                          -1              1                   1                 1                        -1             -1  ...         -1           -1         -1             1                       1                  -1      -1
+1      2                           1              1                   1                 1                         1             -1  ...         -1            0         -1             1                       1                   1      -1
+2      3                           1              0                   1                 1                         1             -1  ...         -1            1         -1             1                       0                  -1      -1
+3      4                           1              0                   1                 1                         1             -1  ...         -1            1         -1             1                      -1                   1      -1
+4      5                           1              0                  -1                 1                         1             -1  ...         -1            0         -1             1                       1                   1       1
+
+[5 rows x 32 columns]
+
+Informazioni sulle colonne:
+<class 'pandas.DataFrame'>
+RangeIndex: 11055 entries, 0 to 11054
+Data columns (total 32 columns):
+ #   Column                       Non-Null Count  Dtype
+---  ------                       --------------  -----
+ 0   index                        11055 non-null  int64
+ 1   having_IPhaving_IP_Address   11055 non-null  int64
+ 2   URLURL_Length                11055 non-null  int64
+ 3   Shortining_Service           11055 non-null  int64
+ 4   having_At_Symbol             11055 non-null  int64
+ 5   double_slash_redirecting     11055 non-null  int64
+ 6   Prefix_Suffix                11055 non-null  int64
+ 7   having_Sub_Domain            11055 non-null  int64
+ 8   SSLfinal_State               11055 non-null  int64
+ 9   Domain_registeration_length  11055 non-null  int64
+ 10  Favicon                      11055 non-null  int64
+ 11  port                         11055 non-null  int64
+ 12  HTTPS_token                  11055 non-null  int64
+ 13  Request_URL                  11055 non-null  int64
+ 14  URL_of_Anchor                11055 non-null  int64
+ 15  Links_in_tags                11055 non-null  int64
+ 16  SFH                          11055 non-null  int64
+ 17  Submitting_to_email          11055 non-null  int64
+ 18  Abnormal_URL                 11055 non-null  int64
+ 19  Redirect                     11055 non-null  int64
+ 20  on_mouseover                 11055 non-null  int64
+ 21  RightClick                   11055 non-null  int64
+ 22  popUpWidnow                  11055 non-null  int64
+ 23  Iframe                       11055 non-null  int64
+ 24  age_of_domain                11055 non-null  int64
+ 25  DNSRecord                    11055 non-null  int64
+ 26  web_traffic                  11055 non-null  int64
+ 27  Page_Rank                    11055 non-null  int64
+ 28  Google_Index                 11055 non-null  int64
+ 29  Links_pointing_to_page       11055 non-null  int64
+ 30  Statistical_report           11055 non-null  int64
+ 31  Result                       11055 non-null  int64
+dtypes: int64(32)
+memory usage: 2.7 MB
+
+Numero di feature usate per il training: 30
+
+Dimensioni training set: 8844 righe (80.0%)
+Dimensioni test set:     2211 righe (20.0%)
+
+Distribuzione classi nel training set:
+Result
+ 1    55.43
+-1    44.57
+Name: proportion, dtype: float64
+
+Distribuzione classi nel test set:
+Result
+ 1    56.76
+-1    43.24
+Name: proportion, dtype: float64
+
+Dimensioni training set: (8844, 30)
+Dimensioni test set: (2211, 30)
+
+RISULTATI SUL TEST SET
+Accuracy: 0.9661
+
+Classification Report:
+               precision    recall  f1-score   support
+
+Phishing (-1)       0.97      0.95      0.96       956
+Legittimo (1)       0.96      0.98      0.97      1255
+
+     accuracy                           0.97      2211
+    macro avg       0.97      0.96      0.97      2211
+ weighted avg       0.97      0.97      0.97      2211
+
+
+--- Risultati sul test set ---
+Accuracy: 0.9661
+Confusion Matrix:
+[[ 909   47]
+ [  28 1227]]
+
+Interpretazione confusion matrix:
+  Veri Negativi (phishing correttamente identificato): 909
+  Falsi Positivi (legittimo segnalato come phishing):  47
+  Falsi Negativi (phishing mancato, molto pericoloso): 28
+  Veri Positivi (legittimo correttamente identificato): 1227
