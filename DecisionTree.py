@@ -32,7 +32,7 @@ percorso_dataset_pc_fisso='D:/Uni/TERZO ANNO/Intelligenza Artificiale/URL-Phishi
 percorso_dataset_portatile='~/Desktop/URL-Phishing-Detector/datasets/PhishingData.csv'
 
 # Caricamento del dataset
-df = pd.read_csv(percorso_dataset_pc_fisso, skipinitialspace=True)
+df = pd.read_csv(percorso_dataset_portatile, skipinitialspace=True)
 df.columns = df.columns.str.strip()
 
 

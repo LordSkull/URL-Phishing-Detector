@@ -4,15 +4,17 @@
 # L'addestramento del modello è stato effettuato utilizzando un Random Forest Classifier, che è un algoritmo di apprendimento automatico basato su alberi decisionali.
 
 
+#region import library
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, cross_val_score, StratifiedKFold
 from sklearn.ensemble import RandomForestClassifier 
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, ConfusionMatrixDisplay
 
-# Importo le robe file plot_config: la funzione di setup, i dizionari di colori
+# Importo le robe del file plot_config: la funzione di setup, i dizionari di colori
 # e colormap, e la funzione di salvataggio
 from plot_config import setup_plot_style, MODEL_COLORS, MODEL_CMAPS, save_figure
+
 
 # funzione che applica lo stile a tutti i grafici
 setup_plot_style()
@@ -20,11 +22,10 @@ setup_plot_style()
 # variabile dove metto il nome del modello
 # utile per dizionari MODEL_COLORS e MODEL_CMAPS ma anche per il nome sul grafico
 MODEL_NAME = 'Random Forest'
+#endregion 
 
-# -----------------------------------------------------------------------------
-# 1. Caricamento e pulizia
-# -----------------------------------------------------------------------------
 
+#region caricamento dataset e pulizia
 # posizione dataset quando lavoro sul fisso
 percorso_dataset_pc_fisso='D:/Uni/TERZO ANNO/Intelligenza Artificiale/URL-Phishing/datasets/PhishingData.csv'
 
@@ -32,7 +33,7 @@ percorso_dataset_pc_fisso='D:/Uni/TERZO ANNO/Intelligenza Artificiale/URL-Phishi
 percorso_dataset_portatile='~/Desktop/URL-Phishing-Detector/datasets/PhishingData.csv'
 
 # Caricamento del dataset
-df = pd.read_csv(percorso_dataset_pc_fisso, skipinitialspace=True)
+df = pd.read_csv(percorso_dataset_portatile, skipinitialspace=True)
 
 # i nome delle feature hanno spazi finali
 # con .str.strip() li rumuovo, in questo modo tengo bello pulito
@@ -49,11 +50,10 @@ print(df.head())
 print("\nInformazioni sulle colonne:")
 df.info()
 '''
+#endregion
 
-# -----------------------------------------------------------------------------
-# 2. Preparazione X e y
-# -----------------------------------------------------------------------------
 
+#region preparazione X e y
 # seprazione feature (x) e target (y)
 # rimuovo index che non mi serve
 # rimuovo Result che sarebbe il target e non deve stare tra le feature
@@ -62,10 +62,10 @@ y = df['Result']
 
 print(f"\nNumero di feature usate per il training: {X.shape[1]}")
 
-# -----------------------------------------------------------------------------
-# 3. Split train/test
-# -----------------------------------------------------------------------------
+#endregion
 
+
+#region split train test
 X_train, X_test, y_train, y_test = train_test_split(X, y,test_size=0.2, random_state=42)
 
 print(f"Training set: {X_train.shape[0]} righe ({X_train.shape[0]/len(df)*100:.1f}%)")
@@ -82,22 +82,19 @@ print(y_test.value_counts(normalize=True).round(4) * 100)
 print(f"\nDimensioni training set: {X_train.shape}")
 print(f"Dimensioni test set: {X_test.shape}")
 '''
+#endregione
 
-# -----------------------------------------------------------------------------
-# 4. Modello Random Forest
-# -----------------------------------------------------------------------------
-
+#region modello random forest
 # Creazione del modello Random Forest Classifier
 model = RandomForestClassifier(n_estimators=80, random_state=42)
 
 # Addestramento del modello
 model.fit(X_train, y_train)
 
+#endregione
 
-# -----------------------------------------------------------------------------
-# 5. Valutazione
-# -----------------------------------------------------------------------------
 
+#region valutazione
 y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
  
@@ -105,11 +102,9 @@ print(f"\n--- RISULTATI {MODEL_NAME.upper()} ---")
 print(f"Accuracy sul test set: {accuracy:.4f}")
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred, target_names=['Phishing', 'Legittimo']))
+#endregione
 
-# -----------------------------------------------------------------------------
-# 6. Grafico Confusion Matrix
-# -----------------------------------------------------------------------------
-
+#region grafico confusion matrix
 # L'argomento labels=[-1, 1] forza l'ordine
 # delle classi: prima la riga/colonna del phishing (-1), poi del legittimo (1).
 # Senza questo argomento sklearn deciderebbe l'ordine da solo e potrebbe
@@ -164,11 +159,10 @@ save_figure(fig, 'confusion_matrix_random_forest')
 
 
 plt.show()
+#endregion
 
-# -----------------------------------------------------------------------------
-# 7. Feature Importance
-# -----------------------------------------------------------------------------
 
+#region Feature Importance
 
 # Importanza di ogni feature durante il
 # training: feature_importances_ è un array con un valore per ogni colonna
@@ -200,3 +194,4 @@ plt.show()
 # per evitare numeri lunghissimi.
 print("\nTop 10 feature più importanti:")
 print(top_features.sort_values(ascending=False).round(4))
+#endregion
