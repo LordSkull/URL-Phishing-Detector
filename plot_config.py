@@ -1,12 +1,8 @@
 """
-Configurazione matplotlib centralizzata
+Configurazione matplotlib
  
-Lo scopo di questo file è UNO: garantire che tutti i grafici prodotti
-dagli script abbiano lo stesso stile - stessi font, stessi colori, stesse dimensioni. 
-
-Importa in ogni script:
-    from plot_config import setup_plot_style, MODEL_COLORS, save_figure
-    setup_plot_style()
+Lo scopo di questo file è garantire che tutti i grafici prodotti
+dagli script abbiano lo stesso stile quindi stessi font, stessi colori e stesse dimensioni. 
 """
 import os
 import matplotlib.pyplot as plt
