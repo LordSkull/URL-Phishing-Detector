@@ -3,6 +3,6 @@ __pycache__/
 *.pyc
 tf.py
 commit_msg.txt
-figures/
+figures
 log_terminale.txt
 Phishing_Features_Analysis.xlsx
